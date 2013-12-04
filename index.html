@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Comandeffect : ComandEffect" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Comandeffect</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/duchdamian/ComandEffect">View on GitHub</a>
+
+          <h1 id="project_title">Comandeffect</h1>
+          <h2 id="project_tagline">ComandEffect</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/duchdamian/ComandEffect/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/duchdamian/ComandEffect/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="nie-usuwaj-informacji-o-autorach" class="anchor" href="#nie-usuwaj-informacji-o-autorach"><span class="octicon octicon-link"></span></a>Nie usuwaj informacji o autorach</h1>
+
+<h1>
+<a name="nie-podszywaj-sie-pod-autorow" class="anchor" href="#nie-podszywaj-sie-pod-autorow"><span class="octicon octicon-link"></span></a>Nie podszywaj sie pod autorow</h1>
+
+<p>variables:
+    {efekty.%player%.ilosc} = 0</p>
+
+<p>options:
+    PktZabicieMin: 1
+    PktZabicieMax: 3</p>
+
+<p>command /efekt [] []:
+    trigger:
+        arg 1 is "fireprot" or "fp":
+            arg 2 is "kup":
+                player has permission "efekt.ochrona.kup" or "efekty.VIP.kup":
+                    {efekty.%player%.ilosc} is greater than 10:
+                        apply fire resistance to the player for 480 seconds
+                        send "&amp;6* &amp;7Otrzymales &amp;6Ochrone przed Ogniem &amp;7na &amp;c8 Minut &amp;7!"
+                        remove 10 from {efekty.%player%.ilosc}
+                        stop
+                    else:
+                        send "&amp;6* &amp;7Brakuje ci punktow zeby to kupic !"
+                        stop
+        arg 1 is "regeneracja" or "rege":
+            arg 2 is "kup":
+                player has permission "efekt.regeneracja.kup" or "efekty.VIP.kup":
+                    {efekty.%player%.ilosc} is greater than 15:
+                        apply regeneration to the player for 480 seconds
+                        send "&amp;6* &amp;7Otrzymales &amp;dRegeneracje &amp;7na &amp;c8 Minut &amp;7!"
+                        remove 15 from {efekty.%player%.ilosc}
+                        stop
+                    else:
+                        send "&amp;6* &amp;7Brakuje ci punktow zeby to kupic !"
+                        stop
+        arg 1 is "punkty" or "p" or "pkt":
+            player has permission "efekt.punkty.sprawdz":
+                send "&amp;6* &amp;7Twoje Punkty : &amp;c%{efekty.%player%.zabicia}%"
+                stop
+        arg 1 is "sila":
+            arg 2 is "kup":
+                player has permission "efekt.sila.kup" or "efekty.VIP.kup":
+                    {ochrona.kup.%player%.zabicia} is greater than 10:
+                        apply strength to the player for 480 seconds
+                        send "&amp;6* &amp;7Otrzymales &amp;4Sile &amp;7na &amp;c8 minut&amp;7 !"
+                        remove 10 from {ochrona.kup.%player%.zabicia}
+                        stop
+                    else:
+                        send "&amp;6* &amp;7Brakuje ci punktow zeby to kupic !"
+                        stop
+        arg 1 is "help":
+            arg 2 is not set:
+                player has permission "efekt.help":
+                    send "&amp;8------------------[ &amp;9CommandEfect &amp;8]------------------"
+                    send "&amp;3/efekt fireprot kup &amp;7- Kupujesz ochrone przed ogniem na 8 Minut"
+                    send "&amp;3/efekt sila kup &amp;7- Kupujesz sile na 8 min"
+                    send "&amp;3/efekt protection kup &amp;7- Kupujesz ochrone na 8 Minut"
+                    send "&amp;3/efekt tworca &amp;7- Wszyscy tworcy skryptu"
+                    stop
+        arg 1 is "autor" or "tworca":
+            send "&amp;8------------------[ &amp;9CommandEfect &amp;8]------------------"
+            send "&amp;3Tworcy &amp;7: eX. i duchdamian [DjDuch]"
+            send "&amp;3Wersja &amp;7: 0.1"
+            stop
+        if arg 1 is not set:
+            if arg 2 is not set:
+                make player execute command "efekt help"
+                stop</p>
+
+<p>on death:
+    if attacker is a player:
+        if victim is a player:
+            set {EfektPunkty} to random integer between {@PktZabicieMin} and {@PktZabicieMax}
+            wait 2 tick
+            add {EfektPunkty} to {ochrona.kup.%attacker%.zabicia}</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Comandeffect maintained by <a href="https://github.com/duchdamian">duchdamian</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
